@@ -118,6 +118,8 @@ Nowadays, the environment is one of the most talked topics in the entire world. 
 
 
 \section{Proposed solution}
+\subsection{Approach}
+
 \subsection{It's all about the garbage can}
 To calculate (and, consequently, improve) the ecological footprint of a user, many objects or activities could be tracked. Water, electricity, gas, natural gas, driving, waste, just to name a few. For our project, our group decided to focus on the garbage that is produced in households. We believe that the waste that we produce is one crucial point of world destabilisation; starting with the plastic that we consume leads up in the oceans, the food we waste that could be feeding someone who has less economic resources, the general rubbish that ends up in polluted landfills - all of this starts in our garbage can.
 
@@ -132,35 +134,41 @@ Given how easy it is for the user to understand the ambient orb, our solution is
 \subsection{Peer pressure}
 This idea, however, generates an incon
 
+\subsection{Materials}
+In order to put in practice and assemble our idea, we aim in the first place to build a functional physical prototype, using the Arduino board. The following materials will be required:
 
-\section{Page Size}
-All SIGCHI submissions should be US letter (8.5 $\times$ 11
-inches). US Letter is the standard option used by this \LaTeX\
-template.
+\begin{itemize}
+	\item \textbf{Garbage can (3 to 4 units)} - each garbage can has built-in sensors that determine the amount of volume present; these values are then sent through Wi-Fi
+	\begin{itemize}
+		\item 2x AA batteries
+		\item 1x Battery holder case
+		\item 1x HC - SR04 Ultrasonic Distance Sensor
+		\item 1x Jumper Wires
+		\item 1x Arduino Board
+		\item 1x Feather HUZZAH w/ ESP8266 WiFi
+		\item 1x Plastic 50l garbage can
+		\item 1x Coloured garbage can cover (grey for common trash; green for glass; yellow for plastic and metal; blue for paper and card)
+	\end{itemize}
+	\item \textbf{Light bulb (indoor use)} - the light bulb acts as an 'ambient orb', and it is placed in a convenient place to the user to grant self-awareness
+	\begin{itemize}
+		\item 1x Xiaomi Mi LED Smart Bulb Yeelight Wi-Fi
+		\item 1x Small lamp - IKEA's Fado
+	\end{itemize}
+	\item \textbf{Portable LED (outdoor use)} - when not in home, users can track their eco footprint on the go with a portable LED that can be attached to a keychain or the back of a smartphone
+	\begin{itemize}
+		\item 1x Adafruit Mini Skinny NeoPixel Digital RGB LED Strip - 60 LED/m (1m)
+		\item 1x Lithium Ion Polymer Battery - 3.7v 150mAh
+		\item 1x Adafruit nRF52840 Feather or equivalent
+		\item 1x Breadboard-friendly SPDT Slide Switch
+		\item 1x JST-PH Battery Extension Cable - 500mm
+	\end{itemize}
+\end{itemize}
 
-\section{Text Formatting}
-Please use an 8.5-point Verdana font, or other sans serifs font as
-close as possible in appearance to Verdana in which these guidelines
-have been set. Arial 9-point font is a reasonable substitute for
-Verdana as it has a similar x-height. Please use serif or
-non-proportional fonts only for special purposes, such as
-distinguishing \texttt{source code} text.
-
-\subsubsection{Text styles}
-The \LaTeX\ template facilitates text formatting for normal (for body
-text); heading 1, heading 2, heading 3; bullet list; numbered list;
-caption; annotation (for notes in the narrow left margin); and
-references (for bibliographic entries). Additionally, here is an
-example of footnoted\footnote{Use footnotes sparingly, if at all.}
-text. As stated in the footnote, footnotes should rarely be used.
+On the other side, we also want to build a simple prototype application that should not only allow the interaction between the user and the system, but also to give the user an in-depth analysis of their ecological footstep, so they can act upon their behaviours. Thus, for the software part, only a computer and a smartphone running Android or iOS are necessary.
 
 
-\subsection{Language, style, and content}
-The written and spoken language of SIGCHI is English. Spelling and
-punctuation may use any dialect of English (e.g., British, Canadian,
-US, etc.) provided this is done consistently. Hyphenation is
-optional. To ensure suitability for an international audience, please
-pay attention to the following:
+\section{Introduction}
+
 
 \begin{table}
   \centering
@@ -243,141 +251,8 @@ pay attention to the following:
   \end{minipage}
 \end{marginfigure}
 
-\section{Figures}
-The examples on this and following pages should help you get a feel
-for how screen-shots and other figures should be placed in the
-template. Your document may use color figures (see
-Figures~\ref{fig:sample}), which are included in the page limit; the
-figures must be usable when printed in black and white. You can use
-the \texttt{\marginpar} command to insert figures in the (left) margin
-of the document (see Figure~\ref{fig:marginfig}). Finally, be sure to
-make images large enough so the important details are legible and
-clear (see Figure~\ref{fig:cats}).
-All figures should include alt text (figure description) for improved accessibility – see the Accessibility section.
-
-\section{Tables}
-You man use tables inline with the text (see Table~\ref{tab:table1})
-or within the margin as shown in Table~\ref{tab:table2}. Try to
-minimize the use of lines (especially vertical lines). \LaTeX\ will
-set the table font and captions sizes correctly; the latter must
-remain unchanged.
-
-\section{Accessibility}
-The Executive Council of SIGCHI has committed to making SIGCHI
-conferences more inclusive for researchers, practitioners, and
-educators with disabilities. As a part of this goal, the all authors
-are expected to work on improving the accessibility of their
-submissions. Specifically, we encourage authors to carry out the
-following five steps:
-\begin{itemize}\compresslist%
-\item Add alternative text (figure description) to all figures
-\item Mark table headings
-\item Generate a tagged PDF
-\item Verify the default language
-\item Set the tab order to ``Use Document Structure''
-\end{itemize}
-
-For links to detailed instructions and resources, please see:
-\url{http://chi2020.acm.org/authors/papers/guide-to-an-accessible-submission/}
-
-Unfortunately good tools do not yet exist to create tagged PDF files
-from Latex. \LaTeX\ users will need to carry out all of the above
-steps in the PDF directly using Adobe Acrobat, after the PDF has been
-generated.
 
 
-\begin{figure*}
-  \centering
-  \includegraphics[width=1.3\columnwidth]{figures/map}
-  \caption{In this image, the map maximizes use of space. You can make
-    figures as wide as you need, up to a maximum of the full width of
-    both columns. Note that \LaTeX\ tends to render large figures on a
-    dedicated page. Image: \ccbynd~ayman on Flickr.}~\label{fig:cats}
-\end{figure*}
-
-\section{Producing and Testing PDF Files}
-We recommend that you produce a PDF version of your submission well
-before the final deadline. Your PDF file must be ACM DL Compliant and
-meet stated requirements,
-\url{http://www.sheridanprinting.com/sigchi/ACM-SIG-distilling-settings.htm}.
-
-\marginpar{\vspace{-23pc}So long as you don't type outside the right
-  margin or bleed into the gutter, it's okay to put annotations over
-  here on the left, too; this annotation is near Hawaii. You'll have
-  to manually align the margin paragraphs to your \LaTeX\ floats using
-  the \texttt{{\textbackslash}vspace{}} command.}
-
-\begin{margintable}[1pc]
-  \begin{minipage}{\marginparwidth}
-    \centering
-    \begin{tabular}{r r l}
-      & {\small \textbf{First}}
-      & {\small \textbf{Location}} \\
-      \toprule
-      Child & 22.5 & Melbourne \\
-      Adult & 22.0 & Bogot\'a \\
-      \midrule
-      Gene & 22.0 & Palo Alto \\
-      John & 34.5 & Minneapolis \\
-      \bottomrule
-    \end{tabular}
-    \caption{A simple narrow table in the left margin
-      space.}~\label{tab:table2}
-  \end{minipage}
-\end{margintable}
-Test your PDF file by viewing or printing it with the same software we
-will use when we receive it, Adobe Acrobat Reader Version 10. This is
-widely available at no cost. Note that most
-reviewers will use a North American/European version of Acrobat
-reader, so please check your PDF accordingly.
-
-\section{Acknowledgements}
-We thank all the volunteers, publications support, staff, and authors
-who wrote and provided helpful comments on previous versions of this
-document. As well authors 1, 2, and 3 gratefully acknowledge the grant
-from NSF (\#1234--2222--ABC). Author 4 for example may want to
-acknowledge a supervisor/manager from their original employer. This
-whole paragraph is just for example. Some of the references cited in
-this paper are included for illustrative purposes only.
-
-\section{References Format}
-Your references should be published materials accessible to the
-public. Internal technical reports may be cited only if they are
-easily accessible and may be obtained by any reader for a nominal
-fee. Proprietary information may not be cited. Private communications
-should be acknowledged in the main text, not referenced (e.g.,
-[Golovchinsky, personal communication]). References must be the same
-font size as other body text. References should be in alphabetical
-order by last name of first author. Use a numbered list of references
-at the end of the article, ordered alphabetically by last name of
-first author, and referenced by numbers in brackets. For papers from
-conference proceedings, include the title of the paper and the name of
-the conference. Do not include the location of the conference or the
-exact date; do include the page numbers if available. 
-
-References should be in ACM citation format:
-\url{http://www.acm.org/publications/submissions/latex_style}.  This
-includes citations to Internet
-resources~\cite{CHINOSAUR:venue,cavender:writing,psy:gangnam}
-according to ACM format, although it is often appropriate to include
-URLs directly in the text, as above. Example reference formatting for
-individual journal articles~\cite{ethics}, articles in conference
-proceedings~\cite{Klemmer:2002:WSC:503376.503378},
-books~\cite{Schwartz:1995:GBF}, theses~\cite{sutherland:sketchpad},
-book chapters~\cite{winner:politics}, an entire journal
-issue~\cite{kaye:puc},
-websites~\cite{acm_categories,cavender:writing},
-tweets~\cite{CHINOSAUR:venue}, patents~\cite{heilig:sensorama}, 
-games~\cite{supermetroid:snes}, and
-online videos~\cite{psy:gangnam} is given here.  See the examples of
-citations at the end of this document and in the accompanying
-\texttt{BibTeX} document. This formatting is a edited version of the
-format automatically generated by the ACM Digital Library
-(\url{http://dl.acm.org}) as ``ACM Ref''. DOI and/or URL links are
-optional but encouraged as are full first names. Note that the
-Hyperlink style used throughout this document uses blue links;
-however, URLs in the references section may optionally appear in
-black.
 
 \balance{} 
 
