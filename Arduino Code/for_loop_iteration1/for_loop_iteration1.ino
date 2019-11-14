@@ -26,6 +26,15 @@ int red_light_pin= 11;
 int green_light_pin = 10;
 int blue_light_pin = 9;
 
+int r = 255;
+int g = 0;
+int b = 0;
+
+// quando e zero, red max
+// 0 -0,5: aumentar gradualmente green
+// 0,5 -1: diminuir vermelho 
+
+
 void setup() {
   Serial.begin(9600);
   // use a for loop to initialize each pin as an output:
@@ -67,12 +76,25 @@ void loop() {
   else if (buttonState == HIGH) {
     changed = false;
   }
+
+  
   digitalWrite(thisPin, HIGH);
-  RGB_color(0, 0, 255);
+  RGB_color(0.5);
+  
 }
 
-void RGB_color(int red_light_value, int green_light_value, int blue_light_value)
+void RGB_color(int value)
  {
+  blue_light_value = 0;
+  if (value < 0.5) {
+    reg_light_value = 255;
+    green_light_value = 255*2*value; 
+  }
+  else {
+    reg_light_value = 255 - 255*(value-0.5)*2;
+    green_light_value = 255; 
+  }
+  
   analogWrite(red_light_pin, red_light_value);
   analogWrite(green_light_pin, green_light_value);
   analogWrite(blue_light_pin, blue_light_value);
