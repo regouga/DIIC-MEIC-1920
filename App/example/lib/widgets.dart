@@ -32,62 +32,10 @@ class ScanResultTile extends StatelessWidget {
     }
   }
 
-  Widget _buildAdvRow(BuildContext context, String title, String value) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 4.0),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Text(title, style: Theme.of(context).textTheme.caption),
-          SizedBox(
-            width: 12.0,
-          ),
-          Expanded(
-            child: Text(
-              value,
-              style: Theme.of(context)
-                  .textTheme
-                  .caption
-                  .apply(color: Colors.black),
-              softWrap: true,
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-
-  String getNiceHexArray(List<int> bytes) {
-    return '[${bytes.map((i) => i.toRadixString(16).padLeft(2, '0')).join(', ')}]'
-        .toUpperCase();
-  }
-
-  String getNiceManufacturerData(Map<int, List<int>> data) {
-    if (data.isEmpty) {
-      return null;
-    }
-    List<String> res = [];
-    data.forEach((id, bytes) {
-      res.add(
-          '${id.toRadixString(16).toUpperCase()}: ${getNiceHexArray(bytes)}');
-    });
-    return res.join(', ');
-  }
-
-  String getNiceServiceData(Map<String, List<int>> data) {
-    if (data.isEmpty) {
-      return null;
-    }
-    List<String> res = [];
-    data.forEach((id, bytes) {
-      res.add('${id.toUpperCase()}: ${getNiceHexArray(bytes)}');
-    });
-    return res.join(', ');
-  }
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionTile(
+    return ListTile(
       title: _buildTitle(context),
       leading: Text(result.rssi.toString()),
       trailing: RaisedButton(
@@ -96,26 +44,6 @@ class ScanResultTile extends StatelessWidget {
         textColor: Colors.white,
         onPressed: (result.advertisementData.connectable) ? onTap : null,
       ),
-      children: <Widget>[
-        _buildAdvRow(
-            context, 'Complete Local Name', result.advertisementData.localName),
-        _buildAdvRow(context, 'Tx Power Level',
-            '${result.advertisementData.txPowerLevel ?? 'N/A'}'),
-        _buildAdvRow(
-            context,
-            'Manufacturer Data',
-            getNiceManufacturerData(
-                    result.advertisementData.manufacturerData) ??
-                'N/A'),
-        _buildAdvRow(
-            context,
-            'Service UUIDs',
-            (result.advertisementData.serviceUuids.isNotEmpty)
-                ? result.advertisementData.serviceUuids.join(', ').toUpperCase()
-                : 'N/A'),
-        _buildAdvRow(context, 'Service Data',
-            getNiceServiceData(result.advertisementData.serviceData) ?? 'N/A'),
-      ],
     );
   }
 }

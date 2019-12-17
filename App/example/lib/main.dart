@@ -6,13 +6,15 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
-import 'package:flutter_blue_example/widgets.dart';
+import 'package:Companion_App/widgets.dart';
+
+import 'homescreen.dart';
 
 void main() {
-  runApp(FlutterBlueApp());
+  runApp(CompanionApp());
 }
 
-class FlutterBlueApp extends StatelessWidget {
+class CompanionApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -23,7 +25,7 @@ class FlutterBlueApp extends StatelessWidget {
           builder: (c, snapshot) {
             final state = snapshot.data;
             if (state == BluetoothState.on) {
-              return FindDevicesScreen();
+              return HomeScreen();
             }
             return BluetoothOffScreen(state: state);
           }),
@@ -39,7 +41,7 @@ class BluetoothOffScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green,
+      backgroundColor: Colors.red,
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -159,22 +161,10 @@ class DeviceScreen extends StatelessWidget {
   List<int> _getRandomBytes() {
     if (nume == 0) {
       nume = nume + 1;
-      return [
-        50,
-        0,
-        100,
-        75,
-        25
-      ];
+      return [50, 0, 100, 75, 25];
     }
     nume = 0;
-    return [
-        80,
-        25,
-        100,
-        75,
-        50
-      ];
+    return [80, 25, 100, 75, 50];
   }
 
   List<Widget> _buildServiceTiles(List<BluetoothService> services) {
