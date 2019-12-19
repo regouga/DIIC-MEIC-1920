@@ -1,27 +1,24 @@
 import 'package:Companion_App/settings.dart';
 import 'package:Companion_App/charts.dart';
 import 'package:flutter/material.dart';
-import 'main.dart';
+
+import 'globals.dart' as globals;
 
 class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text("Eco Footprint"),
+          title: Text("Eco Footprint - " + globals.printMode() + " Mode"),
         ),
         body: Center(
             child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
               Container(
-                child: Image.asset('assets/images/footprint.png'),
+                //child: Image.asset('assets/images/footprint.png'),
+                child: Icon(EcoFootprint.footprint, size:400.0, color: Colors.green),
                 alignment: Alignment.center,
-                constraints: BoxConstraints(
-                    maxHeight: 300.0,
-                    maxWidth: 200.0,
-                    minWidth: 150.0,
-                    minHeight: 150.0),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,

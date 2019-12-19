@@ -1,8 +1,8 @@
+import 'package:Companion_App/charts.dart';
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
 
-import 'languages.dart';
-
+import 'globals.dart' as globals;
 
 class SettingsScreen extends StatefulWidget {
   @override
@@ -22,18 +22,58 @@ class _SettingsScreenState extends State<SettingsScreen> {
             title: 'Common',
             tiles: [
               SettingsTile(
-                title: 'Language',
-                subtitle: 'English',
-                leading: Icon(Icons.language),
-                onTap: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) => LanguagesScreen()));
-                },
-              ),
-              SettingsTile(
-                  title: 'Environment',
-                  subtitle: 'Production',
-                  leading: Icon(Icons.cloud_queue)),
+                  title: 'Footprint Mode',
+                  subtitle: globals.printMode(),
+                  leading: Icon(EcoFootprint.footprint),
+                  onTap: () {
+                    return showDialog(
+                      context: context,
+                      builder: (context) {
+                        return SimpleDialog(
+                          title: Text('Select Footprint Mode'),
+                          children: <Widget>[
+                            Column(
+                              children: <Widget>[
+                                RadioListTile(
+                                  title: Text("Hourly"),
+                                  groupValue: globals.mode,
+                                  value: globals.Modes.hourly,
+                                  onChanged: (globals.Modes value) {
+                                    setState(() {
+                                      globals.mode = value;
+                                    });
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                                RadioListTile(
+                                  title: Text("Daily"),
+                                  groupValue: globals.mode,
+                                  value: globals.Modes.daily,
+                                  onChanged: (globals.Modes value) {
+                                    setState(() {
+                                      globals.mode = value;
+                                    });
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                                RadioListTile(
+                                  title: Text("Monthly"),
+                                  groupValue: globals.mode,
+                                  value: globals.Modes.monthly,
+                                  onChanged: (globals.Modes value) {
+                                    setState(() {
+                                      globals.mode = value;
+                                    });
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }),
             ],
           ),
           SettingsSection(
@@ -44,42 +84,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
               SettingsTile(title: 'Sign out', leading: Icon(Icons.exit_to_app)),
             ],
           ),
-          SettingsSection(
-            title: 'Secutiry',
-            tiles: [
-              SettingsTile.switchTile(
-                title: 'Lock app in background',
-                leading: Icon(Icons.phonelink_lock),
-                switchValue: lockInBackground,
-                onToggle: (bool value) {
-                  setState(() {
-                    lockInBackground = value;
-                  });
-                },
-              ),
-              SettingsTile.switchTile(
-                  title: 'Use fingerprint',
-                  leading: Icon(Icons.fingerprint),
-                  onToggle: (bool value) {},
-                  switchValue: false),
-              SettingsTile.switchTile(
-                title: 'Change password',
-                leading: Icon(Icons.lock),
-                switchValue: true,
-                onToggle: (bool value) {},
-              ),
-            ],
-          ),
-          SettingsSection(
-            title: 'Misc',
-            tiles: [
-              SettingsTile(
-                  title: 'Terms of Service', leading: Icon(Icons.description)),
-              SettingsTile(
-                  title: 'Open source licenses',
-                  leading: Icon(Icons.collections_bookmark)),
-            ],
-          )
         ],
       ),
     );

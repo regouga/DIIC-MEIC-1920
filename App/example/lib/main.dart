@@ -9,6 +9,7 @@ import 'package:flutter_blue/flutter_blue.dart';
 import 'package:Companion_App/widgets.dart';
 
 import 'homescreen.dart';
+import 'globals.dart' as globals;
 
 void main() {
   runApp(CompanionApp());
@@ -18,7 +19,9 @@ class CompanionApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      color: Colors.green,
+      title: 'Companion App',
+      theme: ThemeData(),
+      darkTheme: ThemeData.dark(),
       home: StreamBuilder<BluetoothState>(
           stream: FlutterBlue.instance.state,
           initialData: BluetoothState.unknown,
