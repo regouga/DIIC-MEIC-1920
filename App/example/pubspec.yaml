@@ -9,6 +9,7 @@ dependencies:
   flutter:
     sdk: flutter
   settings_ui: ^0.1.1
+  cloud_firestore: ^0.11.0+2
   bezier_chart:
     git: 
       url: git://github.com/aeyrium/bezier-chart.git

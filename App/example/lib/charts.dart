@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:bezier_chart/bezier_chart.dart';
 import 'package:intl/intl.dart' as intl;
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'dart:math';
 
 class ChartScreen extends StatelessWidget {
   @override
@@ -302,10 +304,45 @@ Widget hourly(BuildContext context) {
 }
 
 Widget daily(BuildContext context) {
-  final fromDate = DateTime(2019, 12, 01);
-  final toDate = DateTime.now();
+  final fromDate = DateTime(2019, 09, 01);
+  final toDate = DateTime(2019, 09, 31);
+
+  final current = DateTime(2019, 09, 10);
+
   final date1 = DateTime.now().subtract(Duration(days: 2));
   final date2 = DateTime.now().subtract(Duration(days: 3));
+
+  final date3 = DateTime.now().subtract(Duration(days: 35));
+  final date4 = DateTime.now().subtract(Duration(days: 36));
+
+  final date5 = DateTime.now().subtract(Duration(days: 65));
+  final date6 = DateTime.now().subtract(Duration(days: 64));
+
+
+  final databaseReference = Firestore.instance;
+
+  List<DataPoint<dynamic>> getData() {
+    var rng = new Random();
+    List<DataPoint<DateTime>> list = new List<DataPoint<DateTime>>();
+    databaseReference
+        .collection("metrics")
+        .getDocuments()
+        .then((QuerySnapshot snapshot) {
+
+      snapshot.documents.forEach((DocumentSnapshot doc) {
+        doc.data.forEach((k,v) => {
+          print('${DateTime.parse(k)}'),
+          list.add(new DataPoint<DateTime>(value: rng.nextInt(100).toDouble(), xAxis: DateTime.parse(k))),
+        });
+
+      });
+    });
+    print(date6.toString());
+    print("fodasse");
+    print(list);
+    return list;
+  }
+
   return Center(
     child: Container(
       height: 200,
@@ -325,16 +362,7 @@ Widget daily(BuildContext context) {
         series: [
           BezierLine(
             label: "",
-            onMissingValue: (dateTime) {
-              if (dateTime.day.isEven) {
-                return 10.0;
-              }
-              return 5.0;
-            },
-            data: [
-              DataPoint<DateTime>(value: 10, xAxis: date1),
-              DataPoint<DateTime>(value: 50, xAxis: date2),
-            ],
+            data: getData(),
           ),
         ],
         config: BezierChartConfig(
@@ -416,7 +444,7 @@ class EcoFootprint {
   static const _kFontFam = 'EcoFootprint';
 
   static const IconData footprint =
-      const IconData(0xe800, fontFamily: _kFontFam);
+  const IconData(0xe800, fontFamily: _kFontFam);
   static const IconData water_drop =
-      const IconData(0xe801, fontFamily: _kFontFam);
+  const IconData(0xe801, fontFamily: _kFontFam);
 }

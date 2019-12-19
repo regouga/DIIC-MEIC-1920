@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "421384371412",
+    "firebase_url": "https://diic-a7.firebaseio.com",
+    "project_id": "diic-a7",
+    "storage_bucket": "diic-a7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:421384371412:android:7e42e8a6a30ac0ee150f41",
+        "android_client_info": {
+          "package_name": "com.pauldemarco.flutter_blue_example"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "421384371412-adm59d5u0flgoorcl75putu02jjm0dj8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDDAenfikQAiVlsHHiPgmvngUdG6p8OT8w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "421384371412-adm59d5u0flgoorcl75putu02jjm0dj8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
