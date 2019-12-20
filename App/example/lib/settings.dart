@@ -79,9 +79,59 @@ class _SettingsScreenState extends State<SettingsScreen> {
           SettingsSection(
             title: 'Account',
             tiles: [
-              SettingsTile(title: 'Phone number', leading: Icon(Icons.phone)),
-              SettingsTile(title: 'Email', leading: Icon(Icons.email)),
-              SettingsTile(title: 'Sign out', leading: Icon(Icons.exit_to_app)),
+              SettingsTile(
+                  title: 'Selected User',
+                  subtitle: globals.printUser(),
+                  leading: Icon(Icons.person),
+                  onTap: () {
+                    return showDialog(
+                      context: context,
+                      builder: (context) {
+                        return SimpleDialog(
+                          title: Text('Select User'),
+                          children: <Widget>[
+                            Column(
+                              children: <Widget>[
+                                RadioListTile(
+                                  title: Text("John Doe"),
+                                  groupValue: globals.user,
+                                  value: globals.Users.john_doe,
+                                  onChanged: (globals.Users value) {
+                                    setState(() {
+                                      globals.user = value;
+                                    });
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                                RadioListTile(
+                                  title: Text("Jane Doe"),
+                                  groupValue: globals.user,
+                                  value: globals.Users.jane_doe,
+                                  onChanged: (globals.Users value) {
+                                    setState(() {
+                                      globals.user = value;
+                                    });
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                                RadioListTile(
+                                  title: Text("Son Doe"),
+                                  groupValue: globals.user,
+                                  value: globals.Users.son_doe,
+                                  onChanged: (globals.Users value) {
+                                    setState(() {
+                                      globals.user = value;
+                                    });
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ],
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  }),
             ],
           ),
         ],
