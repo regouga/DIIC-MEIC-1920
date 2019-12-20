@@ -116,7 +116,7 @@ class ChartScreen extends StatelessWidget {
               children: <Widget>[
                 Stack(
                   children: <Widget>[
-                    hourly(context,getHTransports()),
+                    hourly(context,getHWater()),
                     Container(
                       padding: EdgeInsets.all(5.0),
                       alignment: Alignment.bottomCenter,
@@ -129,7 +129,7 @@ class ChartScreen extends StatelessWidget {
                 ),
                 Stack(
                   children: <Widget>[
-                    daily(context,getDTransports()),
+                    daily(context,getDWater()),
                     Container(
                       padding: EdgeInsets.all(5.0),
                       alignment: Alignment.bottomCenter,
@@ -142,7 +142,7 @@ class ChartScreen extends StatelessWidget {
                 ),
                 Stack(
                   children: <Widget>[
-                    monthly(context,getMTransports()),
+                    monthly(context,getMWater()),
                     Container(
                       padding: EdgeInsets.all(5.0),
                       alignment: Alignment.bottomCenter,
@@ -334,6 +334,90 @@ List<DataPoint<dynamic>> getHTransports() {
   ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 24)));
   return ret;
 }
+
+
+List<DataPoint<dynamic>> getMWater() {
+  List<DataPoint<dynamic>> ret = new List<DataPoint<dynamic>>();
+  ret.add(DataPoint<DateTime>(value: 22, xAxis: DateTime(2019, 01, 01)));
+  ret.add(DataPoint<DateTime>(value: 25, xAxis: DateTime(2019, 02, 01)));
+  ret.add(DataPoint<DateTime>(value: 32, xAxis: DateTime(2019, 03, 01)));
+  ret.add(DataPoint<DateTime>(value: 28, xAxis: DateTime(2019, 04, 01)));
+  ret.add(DataPoint<DateTime>(value: 27, xAxis: DateTime(2019, 05, 01)));
+  ret.add(DataPoint<DateTime>(value: 50, xAxis: DateTime(2019, 06, 01)));
+  ret.add(DataPoint<DateTime>(value: 43, xAxis: DateTime(2019, 07, 01)));
+  ret.add(DataPoint<DateTime>(value: 54, xAxis: DateTime(2019, 08, 01)));
+  ret.add(DataPoint<DateTime>(value: 32, xAxis: DateTime(2019, 09, 01)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 10, 01)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 11, 01)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 12, 01)));
+  return ret;
+}
+
+List<DataPoint<dynamic>> getDWater() {
+  List<DataPoint<dynamic>> ret = new List<DataPoint<dynamic>>();
+  ret.add(DataPoint<DateTime>(value: 21, xAxis: DateTime(2019, 09, 1))); //fds
+  ret.add(DataPoint<DateTime>(value: 12, xAxis: DateTime(2019, 09, 2)));
+  ret.add(DataPoint<DateTime>(value: 8, xAxis: DateTime(2019, 09, 3)));
+  ret.add(DataPoint<DateTime>(value: 11, xAxis: DateTime(2019, 09, 4)));
+  ret.add(DataPoint<DateTime>(value: 12, xAxis: DateTime(2019, 09, 5)));
+  ret.add(DataPoint<DateTime>(value: 15, xAxis: DateTime(2019, 09, 6)));
+  ret.add(DataPoint<DateTime>(value: 26, xAxis: DateTime(2019, 09, 7))); //fds
+  ret.add(DataPoint<DateTime>(value: 28, xAxis: DateTime(2019, 09, 8))); //fds
+  ret.add(DataPoint<DateTime>(value: 17, xAxis: DateTime(2019, 09, 9)));
+  ret.add(DataPoint<DateTime>(value: 7, xAxis: DateTime(2019, 09, 10)));
+  ret.add(DataPoint<DateTime>(value: 18, xAxis: DateTime(2019, 09, 11)));
+  ret.add(DataPoint<DateTime>(value: 11, xAxis: DateTime(2019, 09, 12)));
+  ret.add(DataPoint<DateTime>(value: 24, xAxis: DateTime(2019, 09, 13)));
+  ret.add(DataPoint<DateTime>(value: 24, xAxis: DateTime(2019, 09, 14))); //fds
+  ret.add(DataPoint<DateTime>(value: 32, xAxis: DateTime(2019, 09, 15))); //fds
+  ret.add(DataPoint<DateTime>(value: 12, xAxis: DateTime(2019, 09, 16)));
+  ret.add(DataPoint<DateTime>(value: 11, xAxis: DateTime(2019, 09, 17)));
+  ret.add(DataPoint<DateTime>(value: 14, xAxis: DateTime(2019, 09, 18)));
+  ret.add(DataPoint<DateTime>(value: 17, xAxis: DateTime(2019, 09, 19)));
+  ret.add(DataPoint<DateTime>(value: 28, xAxis: DateTime(2019, 09, 20))); //fds
+  ret.add(DataPoint<DateTime>(value: 23, xAxis: DateTime(2019, 09, 21))); //fds
+  ret.add(DataPoint<DateTime>(value: 12, xAxis: DateTime(2019, 09, 22)));
+  ret.add(DataPoint<DateTime>(value: 12, xAxis: DateTime(2019, 09, 23)));
+  ret.add(DataPoint<DateTime>(value: 17, xAxis: DateTime(2019, 09, 24)));
+  ret.add(DataPoint<DateTime>(value: 15, xAxis: DateTime(2019, 09, 25)));
+  ret.add(DataPoint<DateTime>(value: 12, xAxis: DateTime(2019, 09, 26)));
+  ret.add(DataPoint<DateTime>(value: 42, xAxis: DateTime(2019, 09, 27))); //fds
+  ret.add(DataPoint<DateTime>(value: 33, xAxis: DateTime(2019, 09, 28))); //fds
+  ret.add(DataPoint<DateTime>(value: 20, xAxis: DateTime(2019, 09, 29)));
+  ret.add(DataPoint<DateTime>(value: 10, xAxis: DateTime(2019, 09, 30)));
+  return ret;
+}
+
+List<DataPoint<dynamic>> getHWater() {
+  List<DataPoint<dynamic>> ret = new List<DataPoint<dynamic>>();
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 0)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 1)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 2)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 3)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 4)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 5)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 6)));
+  ret.add(DataPoint<DateTime>(value: 3, xAxis: DateTime(2019, 09, 19, 7)));
+  ret.add(DataPoint<DateTime>(value: 33, xAxis: DateTime(2019, 09, 19, 8)));
+  ret.add(DataPoint<DateTime>(value: 5, xAxis: DateTime(2019, 09, 19, 9)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 10)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 11)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 12)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 13)));
+  ret.add(DataPoint<DateTime>(value: 1, xAxis: DateTime(2019, 09, 19, 14)));
+  ret.add(DataPoint<DateTime>(value: 5, xAxis: DateTime(2019, 09, 19, 15)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 16)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 17)));
+  ret.add(DataPoint<DateTime>(value: 20, xAxis: DateTime(2019, 09, 19, 18)));
+  ret.add(DataPoint<DateTime>(value: 14, xAxis: DateTime(2019, 09, 19, 19)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 20)));
+  ret.add(DataPoint<DateTime>(value: 5, xAxis: DateTime(2019, 09, 19, 21)));
+  ret.add(DataPoint<DateTime>(value: 33, xAxis: DateTime(2019, 09, 19, 22)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 23)));
+  return ret;
+}
+
+
 
 List<DataPoint<dynamic>> getMTrash() {
   List<DataPoint<dynamic>> ret = new List<DataPoint<dynamic>>();
