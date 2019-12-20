@@ -121,10 +121,9 @@ class FindDevicesScreen extends StatelessWidget {
             globals.currentState = BluetoothDeviceState.connected;
             await globals.device.discoverServices();
           }
-          Navigator.of(context)
-              .push(MaterialPageRoute(builder: (context) {
-            return HomeScreen();
-          }));
+
+          runApp(CompanionApp());
+
         },
         
         backgroundColor: Colors.blue,
