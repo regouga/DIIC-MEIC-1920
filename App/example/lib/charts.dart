@@ -28,7 +28,7 @@ class ChartScreen extends StatelessWidget {
               children: <Widget>[
                 Stack(
                   children: <Widget>[
-                    hourly(context,getHTransports()),
+                    hourly(context,getHEnergy()),
                     Container(
                       padding: EdgeInsets.all(5.0),
                       alignment: Alignment.bottomCenter,
@@ -41,7 +41,7 @@ class ChartScreen extends StatelessWidget {
                 ),
                 Stack(
                   children: <Widget>[
-                    daily(context,getDTransports()),
+                    daily(context,getDEnergy()),
                     Container(
                       padding: EdgeInsets.all(5.0),
                       alignment: Alignment.bottomCenter,
@@ -54,7 +54,7 @@ class ChartScreen extends StatelessWidget {
                 ),
                 Stack(
                   children: <Widget>[
-                    monthly(context,getMTransports()),
+                    monthly(context,getMEnergy()),
                     Container(
                       padding: EdgeInsets.all(5.0),
                       alignment: Alignment.bottomCenter,
@@ -72,7 +72,7 @@ class ChartScreen extends StatelessWidget {
               children: <Widget>[
                 Stack(
                   children: <Widget>[
-                    hourly(context,getMTransports()),
+                    hourly(context,getHEnergy()),
                     Container(
                       padding: EdgeInsets.all(5.0),
                       alignment: Alignment.bottomCenter,
@@ -85,7 +85,7 @@ class ChartScreen extends StatelessWidget {
                 ),
                 Stack(
                   children: <Widget>[
-                    daily(context,getDTransports()),
+                    daily(context,getDEnergy()),
                     Container(
                       padding: EdgeInsets.all(5.0),
                       alignment: Alignment.bottomCenter,
@@ -98,7 +98,7 @@ class ChartScreen extends StatelessWidget {
                 ),
                 Stack(
                   children: <Widget>[
-                    monthly(context,getMTransports()),
+                    monthly(context,getMEnergy()),
                     Container(
                       padding: EdgeInsets.all(5.0),
                       alignment: Alignment.bottomCenter,
@@ -332,6 +332,87 @@ List<DataPoint<dynamic>> getHTransports() {
   ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 22)));
   ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 23)));
   ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 24)));
+  return ret;
+}
+
+List<DataPoint<dynamic>> getMEnergy() {
+  List<DataPoint<dynamic>> ret = new List<DataPoint<dynamic>>();
+  ret.add(DataPoint<DateTime>(value: 63, xAxis: DateTime(2019, 01, 01)));
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 02, 01)));
+  ret.add(DataPoint<DateTime>(value: 53, xAxis: DateTime(2019, 03, 01)));
+  ret.add(DataPoint<DateTime>(value: 72, xAxis: DateTime(2019, 04, 01)));
+  ret.add(DataPoint<DateTime>(value: 67, xAxis: DateTime(2019, 05, 01)));
+  ret.add(DataPoint<DateTime>(value: 49, xAxis: DateTime(2019, 06, 01)));
+  ret.add(DataPoint<DateTime>(value: 32, xAxis: DateTime(2019, 07, 01)));
+  ret.add(DataPoint<DateTime>(value: 50, xAxis: DateTime(2019, 08, 01)));
+  ret.add(DataPoint<DateTime>(value: 62, xAxis: DateTime(2019, 09, 01)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 10, 01)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 11, 01)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 12, 01)));
+  return ret;
+}
+
+List<DataPoint<dynamic>> getDEnergy() {
+  List<DataPoint<dynamic>> ret = new List<DataPoint<dynamic>>();
+  ret.add(DataPoint<DateTime>(value: 52, xAxis: DateTime(2019, 09, 1))); //fds
+  ret.add(DataPoint<DateTime>(value: 44, xAxis: DateTime(2019, 09, 2)));
+  ret.add(DataPoint<DateTime>(value: 22, xAxis: DateTime(2019, 09, 3)));
+  ret.add(DataPoint<DateTime>(value: 15, xAxis: DateTime(2019, 09, 4)));
+  ret.add(DataPoint<DateTime>(value: 22, xAxis: DateTime(2019, 09, 5)));
+  ret.add(DataPoint<DateTime>(value: 11, xAxis: DateTime(2019, 09, 6)));
+  ret.add(DataPoint<DateTime>(value: 66, xAxis: DateTime(2019, 09, 7))); //fds
+  ret.add(DataPoint<DateTime>(value: 56, xAxis: DateTime(2019, 09, 8))); //fds
+  ret.add(DataPoint<DateTime>(value: 17, xAxis: DateTime(2019, 09, 9)));
+  ret.add(DataPoint<DateTime>(value: 32, xAxis: DateTime(2019, 09, 10)));
+  ret.add(DataPoint<DateTime>(value: 24, xAxis: DateTime(2019, 09, 11)));
+  ret.add(DataPoint<DateTime>(value: 22, xAxis: DateTime(2019, 09, 12)));
+  ret.add(DataPoint<DateTime>(value: 24, xAxis: DateTime(2019, 09, 13)));
+  ret.add(DataPoint<DateTime>(value: 67, xAxis: DateTime(2019, 09, 14))); //fds
+  ret.add(DataPoint<DateTime>(value: 70, xAxis: DateTime(2019, 09, 15))); //fds
+  ret.add(DataPoint<DateTime>(value: 40, xAxis: DateTime(2019, 09, 16)));
+  ret.add(DataPoint<DateTime>(value: 45, xAxis: DateTime(2019, 09, 17)));
+  ret.add(DataPoint<DateTime>(value: 42, xAxis: DateTime(2019, 09, 18)));
+  ret.add(DataPoint<DateTime>(value: 27, xAxis: DateTime(2019, 09, 19)));
+  ret.add(DataPoint<DateTime>(value: 89, xAxis: DateTime(2019, 09, 20))); //fds
+  ret.add(DataPoint<DateTime>(value: 75, xAxis: DateTime(2019, 09, 21))); //fds
+  ret.add(DataPoint<DateTime>(value: 40, xAxis: DateTime(2019, 09, 22)));
+  ret.add(DataPoint<DateTime>(value: 33, xAxis: DateTime(2019, 09, 23)));
+  ret.add(DataPoint<DateTime>(value: 42, xAxis: DateTime(2019, 09, 24)));
+  ret.add(DataPoint<DateTime>(value: 43, xAxis: DateTime(2019, 09, 25)));
+  ret.add(DataPoint<DateTime>(value: 22, xAxis: DateTime(2019, 09, 26)));
+  ret.add(DataPoint<DateTime>(value: 42, xAxis: DateTime(2019, 09, 27))); //fds
+  ret.add(DataPoint<DateTime>(value: 33, xAxis: DateTime(2019, 09, 28))); //fds
+  ret.add(DataPoint<DateTime>(value: 40, xAxis: DateTime(2019, 09, 29)));
+  ret.add(DataPoint<DateTime>(value: 33, xAxis: DateTime(2019, 09, 30)));
+  return ret;
+}
+
+List<DataPoint<dynamic>> getHEnergy() {
+  List<DataPoint<dynamic>> ret = new List<DataPoint<dynamic>>();
+  ret.add(DataPoint<DateTime>(value: 11, xAxis: DateTime(2019, 09, 19, 0)));
+  ret.add(DataPoint<DateTime>(value: 11, xAxis: DateTime(2019, 09, 19, 1)));
+  ret.add(DataPoint<DateTime>(value: 11, xAxis: DateTime(2019, 09, 19, 2)));
+  ret.add(DataPoint<DateTime>(value: 10, xAxis: DateTime(2019, 09, 19, 3)));
+  ret.add(DataPoint<DateTime>(value: 10, xAxis: DateTime(2019, 09, 19, 4)));
+  ret.add(DataPoint<DateTime>(value: 11, xAxis: DateTime(2019, 09, 19, 5)));
+  ret.add(DataPoint<DateTime>(value: 12, xAxis: DateTime(2019, 09, 19, 6)));
+  ret.add(DataPoint<DateTime>(value: 14, xAxis: DateTime(2019, 09, 19, 7)));
+  ret.add(DataPoint<DateTime>(value: 33, xAxis: DateTime(2019, 09, 19, 8)));
+  ret.add(DataPoint<DateTime>(value: 17, xAxis: DateTime(2019, 09, 19, 9)));
+  ret.add(DataPoint<DateTime>(value: 12, xAxis: DateTime(2019, 09, 19, 10)));
+  ret.add(DataPoint<DateTime>(value: 13, xAxis: DateTime(2019, 09, 19, 11)));
+  ret.add(DataPoint<DateTime>(value: 14, xAxis: DateTime(2019, 09, 19, 12)));
+  ret.add(DataPoint<DateTime>(value: 22, xAxis: DateTime(2019, 09, 19, 13)));
+  ret.add(DataPoint<DateTime>(value: 15, xAxis: DateTime(2019, 09, 19, 14)));
+  ret.add(DataPoint<DateTime>(value: 17, xAxis: DateTime(2019, 09, 19, 15)));
+  ret.add(DataPoint<DateTime>(value: 15, xAxis: DateTime(2019, 09, 19, 16)));
+  ret.add(DataPoint<DateTime>(value: 22, xAxis: DateTime(2019, 09, 19, 17)));
+  ret.add(DataPoint<DateTime>(value: 34, xAxis: DateTime(2019, 09, 19, 18)));
+  ret.add(DataPoint<DateTime>(value: 35, xAxis: DateTime(2019, 09, 19, 19)));
+  ret.add(DataPoint<DateTime>(value: 41, xAxis: DateTime(2019, 09, 19, 20)));
+  ret.add(DataPoint<DateTime>(value: 52, xAxis: DateTime(2019, 09, 19, 21)));
+  ret.add(DataPoint<DateTime>(value: 54, xAxis: DateTime(2019, 09, 19, 22)));
+  ret.add(DataPoint<DateTime>(value: 10, xAxis: DateTime(2019, 09, 19, 23)));
   return ret;
 }
 
