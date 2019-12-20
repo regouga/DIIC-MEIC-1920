@@ -41,6 +41,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   onChanged: (globals.Modes value) {
                                     setState(() {
                                       globals.mode = value;
+                                      globals.updateColors(value);
                                     });
                                     Navigator.of(context).pop();
                                   },
@@ -52,6 +53,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   onChanged: (globals.Modes value) {
                                     setState(() {
                                       globals.mode = value;
+                                      globals.updateColors(value);
                                     });
                                     Navigator.of(context).pop();
                                   },
@@ -63,6 +65,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                                   onChanged: (globals.Modes value) {
                                     setState(() {
                                       globals.mode = value;
+                                      globals.updateColors(value);
                                     });
                                     Navigator.of(context).pop();
                                   },

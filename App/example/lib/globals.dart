@@ -1,22 +1,24 @@
 library my_prj.globals;
 import 'package:flutter_blue/flutter_blue.dart';
+import 'package:flutter/material.dart';
 
 var currentState = BluetoothDeviceState.connected; //TODO: change here to disconnected
 BluetoothDevice device;
 BluetoothCharacteristic cara;
 int nume = 0;
 
-void updateColors(){
-  print(cara);
-  if (nume == 0) {
-    nume = nume + 1;
-    cara.write([50, 0, 100, 75, 25]);
+void updateColors(Modes colorMode){
+  if (colorMode == Modes.hourly) {
+    cara.write(currentHourly);
   }
-  else {
-    nume = 0;
-    cara.write([80, 25, 100, 75, 50]);
+  else if (colorMode == Modes.daily) {
+    cara.write(currentDaily);
+  }
+  else if (colorMode == Modes.monthly) {
+    cara.write(currentMonthly);
   }
 }
+
 
 enum Modes { hourly, daily, monthly }
 Modes mode = Modes.daily;
@@ -49,9 +51,35 @@ String printUser(){
 // 50 amarelo
 // 0 verde
 
-List<int> pegadaS = [0,50,100,50,0];
-List<int> energyS = [100,100,50,100,50];
-List<int> waterS = [50,50,0,50,50];
-List<int> transportsS =[100,50,100,50,0];
-List<int> trashS = [50,50,0,50,100];
+List<int> currentHourly = [0,50,100,50,0];
+List<int> currentDaily = [100,100,50,100,50];
+List<int> currentMonthly = [50,50,0,50,50];
 
+
+Color getColor(){
+  if(mode == Modes.hourly){
+    if(currentHourly[0] < 33)
+      return Colors.greenAccent;
+    else if(33 <= currentHourly[0] && currentHourly[0] < 66)
+      return Colors.yellowAccent;
+    else
+      return Colors.redAccent;
+  }
+  if(mode == Modes.daily){
+    if(currentDaily[0] < 33)
+      return Colors.greenAccent;
+    else if(33 <= currentDaily[0] && currentDaily[0] < 66)
+      return Colors.yellowAccent;
+    else
+      return Colors.redAccent;
+  }
+  if(mode == Modes.monthly){
+    if(currentMonthly[0] < 33)
+      return Colors.greenAccent;
+    else if(33 <= currentMonthly[0] && currentMonthly[0] < 66)
+      return Colors.yellowAccent;
+    else
+      return Colors.redAccent;
+  }
+  return Colors.greenAccent;
+}
