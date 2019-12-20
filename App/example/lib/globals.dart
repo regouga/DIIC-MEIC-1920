@@ -2,7 +2,7 @@ library my_prj.globals;
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:flutter/material.dart';
 
-var currentState = BluetoothDeviceState.connected; //TODO: change here to disconnected
+var currentState = BluetoothDeviceState.disconnected;
 BluetoothDevice device;
 BluetoothCharacteristic cara;
 int nume = 0;

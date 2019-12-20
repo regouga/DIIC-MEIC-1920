@@ -16,7 +16,6 @@ class HomeScreen extends StatelessWidget {
           for(BluetoothCharacteristic c in s.characteristics) {
             if (c.uuid.toString() == "0000dfb1-0000-1000-8000-00805f9b34fb") {
               globals.cara = c;
-              globals.updateColors(globals.Modes.daily);
             }
           }
         }
@@ -26,7 +25,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-//    WidgetsBinding.instance.addPostFrameCallback((_) => findServices()); //TODO: descomentar
+    WidgetsBinding.instance.addPostFrameCallback((_) => findServices());
     return Scaffold(
         appBar: AppBar(
           title: Text("Eco Footprint - " + globals.printMode() + " Mode"),
@@ -69,7 +68,7 @@ class HomeScreen extends StatelessWidget {
                                 heroTag: "btn2",
                                 child: Icon(Icons.settings, size: 60.0),
                                 onPressed: () {
-//                                  globals.updateColors(); TODO: descomentar
+                                  globals.updateColors(globals.mode);
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
                                         builder: (context) =>
