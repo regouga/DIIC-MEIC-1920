@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) => findServices());
+//    WidgetsBinding.instance.addPostFrameCallback((_) => findServices()); //TODO: descomentar
     return Scaffold(
         appBar: AppBar(
           title: Text("Eco Footprint - " + globals.printMode() + " Mode"),
@@ -68,7 +68,7 @@ class HomeScreen extends StatelessWidget {
                                 heroTag: "btn2",
                                 child: Icon(Icons.settings, size: 60.0),
                                 onPressed: () {
-                                  globals.updateColors();
+//                                  globals.updateColors(); TODO: descomentar
                                   Navigator.of(context).push(
                                     MaterialPageRoute(
                                         builder: (context) =>

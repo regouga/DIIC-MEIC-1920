@@ -1,7 +1,7 @@
 library my_prj.globals;
 import 'package:flutter_blue/flutter_blue.dart';
 
-var currentState = BluetoothDeviceState.disconnected;
+var currentState = BluetoothDeviceState.connected; //TODO: change here to disconnected
 BluetoothDevice device;
 BluetoothCharacteristic cara;
 int nume = 0;
@@ -44,3 +44,14 @@ String printUser(){
   }
   return "Son Doe";
 }
+
+// 100 vermelho
+// 50 amarelo
+// 0 verde
+
+List<int> pegadaS = [0,50,100,50,0];
+List<int> energyS = [100,100,50,100,50];
+List<int> waterS = [50,50,0,50,50];
+List<int> transportsS =[100,50,100,50,0];
+List<int> trashS = [50,50,0,50,100];
+

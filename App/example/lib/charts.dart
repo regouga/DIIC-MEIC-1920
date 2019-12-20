@@ -28,7 +28,7 @@ class ChartScreen extends StatelessWidget {
               children: <Widget>[
                 Stack(
                   children: <Widget>[
-                    hourly(context),
+                    hourly(context,getHTransports()),
                     Container(
                       padding: EdgeInsets.all(5.0),
                       alignment: Alignment.bottomCenter,
@@ -41,7 +41,7 @@ class ChartScreen extends StatelessWidget {
                 ),
                 Stack(
                   children: <Widget>[
-                    daily(context),
+                    daily(context,getDTransports()),
                     Container(
                       padding: EdgeInsets.all(5.0),
                       alignment: Alignment.bottomCenter,
@@ -54,7 +54,7 @@ class ChartScreen extends StatelessWidget {
                 ),
                 Stack(
                   children: <Widget>[
-                    monthly(context),
+                    monthly(context,getMTransports()),
                     Container(
                       padding: EdgeInsets.all(5.0),
                       alignment: Alignment.bottomCenter,
@@ -72,7 +72,7 @@ class ChartScreen extends StatelessWidget {
               children: <Widget>[
                 Stack(
                   children: <Widget>[
-                    hourly(context),
+                    hourly(context,getMTransports()),
                     Container(
                       padding: EdgeInsets.all(5.0),
                       alignment: Alignment.bottomCenter,
@@ -85,7 +85,7 @@ class ChartScreen extends StatelessWidget {
                 ),
                 Stack(
                   children: <Widget>[
-                    daily(context),
+                    daily(context,getDTransports()),
                     Container(
                       padding: EdgeInsets.all(5.0),
                       alignment: Alignment.bottomCenter,
@@ -98,7 +98,7 @@ class ChartScreen extends StatelessWidget {
                 ),
                 Stack(
                   children: <Widget>[
-                    monthly(context),
+                    monthly(context,getMTransports()),
                     Container(
                       padding: EdgeInsets.all(5.0),
                       alignment: Alignment.bottomCenter,
@@ -116,7 +116,7 @@ class ChartScreen extends StatelessWidget {
               children: <Widget>[
                 Stack(
                   children: <Widget>[
-                    hourly(context),
+                    hourly(context,getHTransports()),
                     Container(
                       padding: EdgeInsets.all(5.0),
                       alignment: Alignment.bottomCenter,
@@ -129,7 +129,7 @@ class ChartScreen extends StatelessWidget {
                 ),
                 Stack(
                   children: <Widget>[
-                    daily(context),
+                    daily(context,getDTransports()),
                     Container(
                       padding: EdgeInsets.all(5.0),
                       alignment: Alignment.bottomCenter,
@@ -142,7 +142,7 @@ class ChartScreen extends StatelessWidget {
                 ),
                 Stack(
                   children: <Widget>[
-                    monthly(context),
+                    monthly(context,getMTransports()),
                     Container(
                       padding: EdgeInsets.all(5.0),
                       alignment: Alignment.bottomCenter,
@@ -160,7 +160,7 @@ class ChartScreen extends StatelessWidget {
               children: <Widget>[
                 Stack(
                   children: <Widget>[
-                    hourly(context),
+                    hourly(context,getHTransports()),
                     Container(
                       padding: EdgeInsets.all(5.0),
                       alignment: Alignment.bottomCenter,
@@ -173,7 +173,7 @@ class ChartScreen extends StatelessWidget {
                 ),
                 Stack(
                   children: <Widget>[
-                    daily(context),
+                    daily(context,getHTransports()),
                     Container(
                       padding: EdgeInsets.all(5.0),
                       alignment: Alignment.bottomCenter,
@@ -186,7 +186,7 @@ class ChartScreen extends StatelessWidget {
                 ),
                 Stack(
                   children: <Widget>[
-                    monthly(context),
+                    monthly(context,getMTransports()),
                     Container(
                       padding: EdgeInsets.all(5.0),
                       alignment: Alignment.bottomCenter,
@@ -204,7 +204,7 @@ class ChartScreen extends StatelessWidget {
               children: <Widget>[
                 Stack(
                   children: <Widget>[
-                    hourly(context),
+                    hourly(context,getHTrash()),
                     Container(
                       padding: EdgeInsets.all(5.0),
                       alignment: Alignment.bottomCenter,
@@ -217,7 +217,7 @@ class ChartScreen extends StatelessWidget {
                 ),
                 Stack(
                   children: <Widget>[
-                    daily(context),
+                    daily(context,getDTrash()),
                     Container(
                       padding: EdgeInsets.all(5.0),
                       alignment: Alignment.bottomCenter,
@@ -230,7 +230,7 @@ class ChartScreen extends StatelessWidget {
                 ),
                 Stack(
                   children: <Widget>[
-                    monthly(context),
+                    monthly(context,getMTrash()),
                     Container(
                       padding: EdgeInsets.all(5.0),
                       alignment: Alignment.bottomCenter,
@@ -250,9 +250,176 @@ class ChartScreen extends StatelessWidget {
   }
 }
 
-Widget hourly(BuildContext context) {
-  final fromDate = DateTime.now().subtract(Duration(hours: 24));
-  final toDate = DateTime.now();
+
+
+List<DataPoint<dynamic>> getDTransports() {
+  final databaseReference = Firestore.instance;
+  List<DataPoint<DateTime>> list = new List<DataPoint<DateTime>>();
+  databaseReference
+      .collection("metrics")
+      .getDocuments()
+      .then((QuerySnapshot snapshot) {
+
+    snapshot.documents.forEach((DocumentSnapshot doc) {
+      for(var doc in snapshot.documents){
+        for (var f in doc.data.keys){
+          var score = 1.1;
+          score += doc[f]["driving"] > 0 ? 30 : 0;
+          score += doc[f]["bus"] > 0 ? 20 : 0;
+          score += doc[f]["train"] > 0 ? 10 : 0;
+
+
+          score -= doc[f]["walking"] > 0 ? 10 : 0;
+          score -= doc[f]["cycling"] > 0 ? 10 : 0;
+          score -= doc[f]["moving"] > 0 ? 10 : 0;
+
+          if(doc[f]["flying"] > 0){
+            score = 100;
+          }
+          score = score < 0 ? 0 : score;
+          score = score > 100 ? 100 : score;
+          list.add(new DataPoint<DateTime>(value: score.toDouble(), xAxis: DateTime.parse(f)));
+        }
+      }
+    });
+  });
+  print(list);
+  return list;
+}
+
+List<DataPoint<dynamic>> getMTransports() {
+  List<DataPoint<dynamic>> ret = new List<DataPoint<dynamic>>();
+  ret.add(DataPoint<DateTime>(value: 70, xAxis: DateTime(2019, 01, 01)));
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 02, 01)));
+  ret.add(DataPoint<DateTime>(value: 60, xAxis: DateTime(2019, 03, 01)));
+  ret.add(DataPoint<DateTime>(value: 70, xAxis: DateTime(2019, 04, 01)));
+  ret.add(DataPoint<DateTime>(value: 50, xAxis: DateTime(2019, 05, 01)));
+  ret.add(DataPoint<DateTime>(value: 60, xAxis: DateTime(2019, 06, 01)));
+  ret.add(DataPoint<DateTime>(value: 40, xAxis: DateTime(2019, 07, 01)));
+  ret.add(DataPoint<DateTime>(value: 30, xAxis: DateTime(2019, 08, 01)));
+  ret.add(DataPoint<DateTime>(value: 40, xAxis: DateTime(2019, 09, 01)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 10, 01)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 11, 01)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 12, 01)));
+  return ret;
+}
+
+List<DataPoint<dynamic>> getHTransports() {
+  List<DataPoint<dynamic>> ret = new List<DataPoint<dynamic>>();
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 0)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 1)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 2)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 3)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 4)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 5)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 6)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 7)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 8)));
+  ret.add(DataPoint<DateTime>(value: 20, xAxis: DateTime(2019, 09, 19, 9)));
+  ret.add(DataPoint<DateTime>(value: 10, xAxis: DateTime(2019, 09, 19, 10)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 11)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 12)));
+  ret.add(DataPoint<DateTime>(value: 10, xAxis: DateTime(2019, 09, 19, 13)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 14)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 15)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 16)));
+  ret.add(DataPoint<DateTime>(value: 20, xAxis: DateTime(2019, 09, 19, 17)));
+  ret.add(DataPoint<DateTime>(value: 20, xAxis: DateTime(2019, 09, 19, 18)));
+  ret.add(DataPoint<DateTime>(value: 10, xAxis: DateTime(2019, 09, 19, 19)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 20)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 21)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 22)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 23)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 24)));
+  return ret;
+}
+
+List<DataPoint<dynamic>> getMTrash() {
+  List<DataPoint<dynamic>> ret = new List<DataPoint<dynamic>>();
+  ret.add(DataPoint<DateTime>(value: 70, xAxis: DateTime(2019, 01, 01)));
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 02, 01)));
+  ret.add(DataPoint<DateTime>(value: 60, xAxis: DateTime(2019, 03, 01)));
+  ret.add(DataPoint<DateTime>(value: 70, xAxis: DateTime(2019, 04, 01)));
+  ret.add(DataPoint<DateTime>(value: 50, xAxis: DateTime(2019, 05, 01)));
+  ret.add(DataPoint<DateTime>(value: 60, xAxis: DateTime(2019, 06, 01)));
+  ret.add(DataPoint<DateTime>(value: 40, xAxis: DateTime(2019, 07, 01)));
+  ret.add(DataPoint<DateTime>(value: 30, xAxis: DateTime(2019, 08, 01)));
+  ret.add(DataPoint<DateTime>(value: 40, xAxis: DateTime(2019, 09, 01)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 10, 01)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 11, 01)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 12, 01)));
+  return ret;
+}
+
+List<DataPoint<dynamic>> getDTrash() {
+  List<DataPoint<dynamic>> ret = new List<DataPoint<dynamic>>();
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 09, 1)));
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 09, 2)));
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 09, 3)));
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 09, 4)));
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 09, 5)));
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 09, 6)));
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 09, 7)));
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 09, 8)));
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 09, 9)));
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 09, 10)));
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 09, 11)));
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 09, 12)));
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 09, 13)));
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 09, 14)));
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 09, 15)));
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 09, 16)));
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 09, 17)));
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 09, 18)));
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 09, 19)));
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 09, 20)));
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 09, 21)));
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 09, 22)));
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 09, 23)));
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 09, 24)));
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 09, 25)));
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 09, 26)));
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 09, 27)));
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 09, 28)));
+  ret.add(DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 09, 29)));
+  ret.add(DataPoint<DateTime>(value: 33, xAxis: DateTime(2019, 09, 30)));
+  ret.add(DataPoint<DateTime>(value: 22, xAxis: DateTime(2019, 09, 31)));
+  return ret;
+}
+
+List<DataPoint<dynamic>> getHTrash() {
+  List<DataPoint<dynamic>> ret = new List<DataPoint<dynamic>>();
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 0)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 1)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 2)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 3)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 4)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 5)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 6)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 7)));
+  ret.add(DataPoint<DateTime>(value: 30, xAxis: DateTime(2019, 09, 19, 8)));
+  ret.add(DataPoint<DateTime>(value: 20, xAxis: DateTime(2019, 09, 19, 9)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 10)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 11)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 12)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 13)));
+  ret.add(DataPoint<DateTime>(value: 15, xAxis: DateTime(2019, 09, 19, 14)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 15)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 16)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 17)));
+  ret.add(DataPoint<DateTime>(value: 20, xAxis: DateTime(2019, 09, 19, 18)));
+  ret.add(DataPoint<DateTime>(value: 10, xAxis: DateTime(2019, 09, 19, 19)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 20)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 21)));
+  ret.add(DataPoint<DateTime>(value: 40, xAxis: DateTime(2019, 09, 19, 22)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 23)));
+  ret.add(DataPoint<DateTime>(value: 0, xAxis: DateTime(2019, 09, 19, 24)));
+  return ret;
+}
+
+Widget hourly(BuildContext context,List<DataPoint<dynamic>> gendata) {
+  final fromDate = DateTime(2019, 09, 30,0,0,0);
+  final toDate = DateTime(2019, 09, 30,23,59,59);
 
   final date1 = toDate.subtract(Duration(hours: 2));
   final date2 = toDate.subtract(Duration(hours: 3));
@@ -277,14 +444,7 @@ Widget hourly(BuildContext context) {
         series: [
           BezierLine(
             label: "",
-            data: [
-              DataPoint<DateTime>(value: 0, xAxis: date1),
-              DataPoint<DateTime>(value: 50, xAxis: date2),
-              DataPoint<DateTime>(value: 100, xAxis: date3),
-              DataPoint<DateTime>(value: 100, xAxis: date4),
-              DataPoint<DateTime>(value: 40, xAxis: date5),
-              DataPoint<DateTime>(value: 47, xAxis: date6),
-            ],
+            data: gendata,
           ),
         ],
         config: BezierChartConfig(
@@ -302,88 +462,11 @@ Widget hourly(BuildContext context) {
   );
 }
 
-Widget daily(BuildContext context) {
+
+
+Widget daily(BuildContext context,List<DataPoint<dynamic>> gendata) {
   final fromDate = DateTime(2019, 09, 01);
   final toDate = DateTime(2019, 09, 31);
-
-  final databaseReference = Firestore.instance;
-
-  DateTime getDataFromDate() {
-    var low = DateTime(2020, 09, 01);
-    databaseReference
-        .collection("metrics")
-        .getDocuments()
-        .then((QuerySnapshot snapshot) {
-      snapshot.documents.forEach((DocumentSnapshot doc) {
-        for(var doc in snapshot.documents){
-          for (var f in doc.data.keys){
-            if(DateTime.parse(f).millisecondsSinceEpoch < low.millisecondsSinceEpoch){
-              low = DateTime.parse(f);
-            }
-
-          }
-        }
-      });
-    });
-    return low;
-  }
-
-  DateTime getDataToDate() {
-    var high = DateTime(1990, 09, 01);
-    databaseReference
-        .collection("metrics")
-        .getDocuments()
-        .then((QuerySnapshot snapshot) {
-      snapshot.documents.forEach((DocumentSnapshot doc) {
-        for(var doc in snapshot.documents){
-          for (var f in doc.data.keys){
-            if(DateTime.parse(f).millisecondsSinceEpoch > high.millisecondsSinceEpoch){
-              high = DateTime.parse(f);
-            }
-
-          }
-        }
-      });
-    });
-    return high;
-  }
-
-  List<DataPoint<dynamic>> getData() {
-    List<DataPoint<DateTime>> list = new List<DataPoint<DateTime>>();
-    databaseReference
-        .collection("metrics")
-        .getDocuments()
-        .then((QuerySnapshot snapshot) {
-
-      snapshot.documents.forEach((DocumentSnapshot doc) {
-        for(var doc in snapshot.documents){
-          for (var f in doc.data.keys){
-            var score = 1.1;
-            score += doc[f]["driving"] > 0 ? 30 : 0;
-            score += doc[f]["bus"] > 0 ? 20 : 0;
-            score += doc[f]["train"] > 0 ? 10 : 0;
-
-
-            score -= doc[f]["walking"] > 0 ? 10 : 0;
-            score -= doc[f]["cycling"] > 0 ? 10 : 0;
-            score -= doc[f]["moving"] > 0 ? 10 : 0;
-
-            if(doc[f]["flying"] > 0){
-              score = 100;
-            }
-            score = score < 0 ? 0 : score;
-            score = score > 100 ? 100 : score;
-            list.add(new DataPoint<DateTime>(value: score.toDouble(), xAxis: DateTime.parse(f)));
-          }
-        }
-      });
-    });
-    print(list);
-//    print(getDataFromDate());
-//    print(getDataToDate());
-    return list;
-  }
-
 
 
   return Center(
@@ -405,7 +488,7 @@ Widget daily(BuildContext context) {
         series: [
           BezierLine(
             label: "",
-            data: getData(),
+            data: gendata,
             onMissingValue: (dateTime) {
               return 0;
             },
@@ -428,9 +511,9 @@ Widget daily(BuildContext context) {
   );
 }
 
-Widget monthly(BuildContext context) {
-  final fromDate = DateTime(2019, 01, 01);
-  final toDate = DateTime(2019, 12, 01);
+Widget monthly(BuildContext context,List<DataPoint<dynamic>> gendata) {
+  final fromDate = DateTime(2019, 09, 01);
+  final toDate = DateTime(2019, 09, 30);
 
   return Center(
     child: Container(
@@ -450,20 +533,7 @@ Widget monthly(BuildContext context) {
               }
               return 5.0;
             },
-            data: [
-              DataPoint<DateTime>(value: 70, xAxis: DateTime(2019, 01, 01)),
-              DataPoint<DateTime>(value: 65, xAxis: DateTime(2019, 02, 01)),
-              DataPoint<DateTime>(value: 60, xAxis: DateTime(2019, 03, 01)),
-              DataPoint<DateTime>(value: 70, xAxis: DateTime(2019, 04, 01)),
-              DataPoint<DateTime>(value: 50, xAxis: DateTime(2019, 05, 01)),
-              DataPoint<DateTime>(value: 60, xAxis: DateTime(2019, 06, 01)),
-              DataPoint<DateTime>(value: 40, xAxis: DateTime(2019, 07, 01)),
-              DataPoint<DateTime>(value: 30, xAxis: DateTime(2019, 08, 01)),
-              DataPoint<DateTime>(value: 40, xAxis: DateTime(2019, 09, 01)),
-              DataPoint<DateTime>(value: 70, xAxis: DateTime(2019, 10, 01)),
-              DataPoint<DateTime>(value: 80, xAxis: DateTime(2019, 11, 01)),
-              DataPoint<DateTime>(value: 50, xAxis: DateTime(2019, 12, 01)),
-            ],
+            data: gendata,
           ),
         ],
         config: BezierChartConfig(
