@@ -4,6 +4,7 @@
 
 import 'dart:async';
 
+import 'package:Companion_App/settings.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_blue/flutter_blue.dart';
 import 'package:Companion_App/widgets.dart';
@@ -112,8 +113,8 @@ class FindDevicesScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        icon: Icon(Icons.link),
-        label: Text("Link Footprint"),
+        icon: Icon(Icons.link, color: Colors.white,),
+        label: Text("Link Footprint", style: TextStyle(color: Colors.white),),
         onPressed: () async {
           if (globals.currentState == BluetoothDeviceState.disconnected) {
             await globals.device.connect();

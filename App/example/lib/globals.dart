@@ -30,3 +30,17 @@ String printMode(){
   }
   return "Monthly";
 }
+
+
+enum Users { john_doe, jane_doe, son_doe }
+Users user = Users.john_doe;
+String userString = mode.toString().split('.').last;
+String printUser(){
+  if (user == Users.john_doe){
+    return "John Doe";
+  }
+  else if(user == Users.jane_doe){
+    return "Jane Doe";
+  }
+  return "Son Doe";
+}
