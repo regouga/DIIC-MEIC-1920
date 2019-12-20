@@ -51,9 +51,9 @@ String printUser(){
 // 50 amarelo
 // 0 verde
 
-List<int> currentHourly = [0,50,100,50,0];
-List<int> currentDaily = [100,100,50,100,50];
-List<int> currentMonthly = [50,50,0,50,50];
+List<int> currentHourly = [0,50,0,0,0];
+List<int> currentDaily = [50,100,50,0,50];
+List<int> currentMonthly = [50,100,50,50,100];
 
 
 Color getColor(){
