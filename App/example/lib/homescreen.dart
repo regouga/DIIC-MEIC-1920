@@ -16,6 +16,7 @@ class HomeScreen extends StatelessWidget {
           for(BluetoothCharacteristic c in s.characteristics) {
             if (c.uuid.toString() == "0000dfb1-0000-1000-8000-00805f9b34fb") {
               globals.cara = c;
+              globals.updateColors(globals.Modes.daily);
             }
           }
         }
@@ -36,7 +37,7 @@ class HomeScreen extends StatelessWidget {
                 children: <Widget>[
               Container(
                 //child: Image.asset('assets/images/footprint.png'),
-                child: Icon(EcoFootprint.footprint, size:400.0, color: Colors.green),
+                child: Icon(EcoFootprint.footprint, size:400.0, color: globals.getColor()),
                 alignment: Alignment.center,
               ),
               Row(
