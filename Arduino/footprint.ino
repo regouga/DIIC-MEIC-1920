@@ -8,7 +8,7 @@ Adafruit_NeoPixel pixels(NUMPIXELS, LEDS_PIN, NEO_GRB + NEO_KHZ800);
 
 int buttonState = 0; 
 uint32_t curr_color[5];
-int curr_selection = 0;
+int curr_selection = -1;
 boolean update_leds = true;
 
 void setup() {
@@ -22,19 +22,19 @@ void setup() {
 }
 
 void loop() {
-    int value = 0;
-    
-    if(Serial.available()){
-      Serial.println("New values received");
-      for(int i=0; i<5; i++) {
-        int value = Serial.read();
-        Serial.print("Value: ");
-        Serial.println(value / 100.0); 
-        curr_color[i] = toColor(value / 100.0);
-      }
-      update_leds = true;
-    };
-    
+  int value = 0;
+  
+  if(Serial.available()){
+    Serial.println("New values received");
+    for(int i=0; i<5; i++) {
+      int value = Serial.read();
+      Serial.print("Value: ");
+      Serial.println(value / 100.0); 
+      curr_color[i] = toColor(value / 100.0);
+    }
+    update_leds = true;
+  };
+  
   if (digitalRead(BUTTON_PIN) == LOW) {
     update_leds = true;
     delay(200);
@@ -44,25 +44,29 @@ void loop() {
 
   if (update_leds) {
     Serial.println("Updating LEDs");
-    for(int i=12; i<NUMPIXELS; i++) pixels.setPixelColor(i, curr_color[curr_selection]);
+    for(int i=12; i<NUMPIXELS; i++) pixels.setPixelColor(i, curr_color[curr_selection+1]);
+    if (curr_selection == -2) {
+      for(int i=12; i<NUMPIXELS; i++) pixels.setPixelColor(i, 0);
+    }
     pixels.show();
     update_leds = false;
   }
 }
 
 void buttonStuffs() {
-  int shift = 5;
-  if(curr_selection > 0) pixels.setPixelColor(curr_selection + shift, 0);
+  int shift = 0;
+  if(curr_selection >= 0) pixels.setPixelColor(curr_selection * 3 + shift, 0);
   curr_selection++;
-  if (curr_selection == 5) { 
-    curr_selection = 0;
+  if (curr_selection == 4) { 
+    curr_selection = -2;
   }
-  if(curr_selection > 0) pixels.setPixelColor(curr_selection + shift, pixels.Color(0,0,26));
+  if(curr_selection >= 0) pixels.setPixelColor(curr_selection * 3 + shift, pixels.Color(0,0,0.1*255));
 }
 
 uint32_t toColor(float value)
  {
   int red, green, blue;
+  value = 1 - value;
   blue = 0;
   if (value < 0.5) {
     red = 255;
